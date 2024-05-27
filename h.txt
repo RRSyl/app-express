@@ -1,0 +1,29 @@
+const sequelize = require('../config/config');
+const Actor = require('../models/Actor');
+const Film = require('../models/Film');
+
+const seed = async () => {
+  await sequelize.sync({ alter: true });
+
+
+  await Actor.bulkCreate([
+    { first_name: 'Reza', last_name: 'Rahadian', age: 34 },
+    { first_name: 'Chelsea', last_name: 'Islan', age: 25 },
+    { first_name: 'Nicholas', last_name: 'Saputra', age: 36 },
+    { first_name: 'Dian', last_name: 'Sastrowardoyo', age: 39 },
+    { first_name: 'Adinia', last_name: 'Wirasti', age: 34 }
+  ]);
+
+
+  await Film.bulkCreate([
+    { title: 'Laskar Pelangi', category: 'Drama' },
+    { title: 'Habibie & Ainun', category: 'Biografi' },
+    { title: 'AADC', category: 'Romance' },
+    { title: '5 cm', category: 'Petualangan' },
+    { title: 'Ayat-Ayat Cinta', category: 'Drama' }
+  ]);
+
+  console.log('Seeding complete.');
+};
+
+seed().catch(err => console.log(err));
